@@ -1,5 +1,8 @@
 package kr.ac.sku.intothevegan.domain;
 
+import javax.persistence.Entity;
+
+
 public class Member {
     String id;
     String username;

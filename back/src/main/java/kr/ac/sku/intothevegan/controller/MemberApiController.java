@@ -9,6 +9,7 @@ public class MemberApiController {
 
     @PostMapping("/api/members")
     public Member member(){
+        System.out.println("MemberApiController 진입");
 
         Member member = new Member("sku","홍길동","ma123","sku1@sku.ac.kr");
 
