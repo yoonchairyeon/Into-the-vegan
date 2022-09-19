@@ -33,7 +33,7 @@ public class CustomValidators {
 
         @Override
         protected void doValidate(UserDto.Request dto, Errors errors) {
-            if (userRepository.existsByNickname(dto.toEntity().getNickname())) {
+            if (userRepository.existsByName(dto.toEntity().getName())) {
                 errors.rejectValue("nickname", "닉네임 중복 오류", "이미 사용중인 닉네임 입니다.");
             }
         }

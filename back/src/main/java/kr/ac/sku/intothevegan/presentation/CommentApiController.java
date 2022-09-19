@@ -24,7 +24,7 @@ public class CommentApiController {
     @PostMapping("/posts/{id}/comments")
     public ResponseEntity save(@PathVariable Long id, @RequestBody CommentDto.Request dto,
                                @LoginUser UserDto.Response userSessionDto) {
-        return ResponseEntity.ok(commentService.save(id, userSessionDto.getNickname(), dto));
+        return ResponseEntity.ok(commentService.save(id, userSessionDto.getName(), dto));
     }
 
     /* READ */

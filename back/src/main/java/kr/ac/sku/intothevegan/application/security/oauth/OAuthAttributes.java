@@ -23,7 +23,7 @@ public class OAuthAttributes {
     private Map<String, Object> attributes;
     private String nameAttributeKey;
     private String username;
-    private String nickname;
+    private String name;
     private String email;
     private Role role;
 
@@ -42,7 +42,7 @@ public class OAuthAttributes {
         return OAuthAttributes.builder()
                 .username((String) attributes.get("email"))
                 .email((String) attributes.get("email"))
-                .nickname((String) attributes.get("name"))
+                .name((String) attributes.get("name"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -57,7 +57,7 @@ public class OAuthAttributes {
         return OAuthAttributes.builder()
                 .username((String) response.get("email"))
                 .email((String) response.get("email"))
-                .nickname((String) response.get("nickname"))
+                .name((String) response.get("name"))
                 .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -67,7 +67,7 @@ public class OAuthAttributes {
         return User.builder()
                 .username(email)
                 .email(email)
-                .nickname(nickname)
+                .name(name)
                 .role(Role.SOCIAL)
                 .build();
     }

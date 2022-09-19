@@ -36,75 +36,56 @@
     <div class="site-mobile-menu-body"></div>
   </div>
 
-  <!-- 배경색 참고
-  <div class="sec-3 section bg-light">-->
-
-  <!--메뉴 헤더로 -->
-
   <nav  class="site-nav">
     <div class="container" style="background-color: #eaeaea" >
       <div class="site-navigation" >
 
 
-        <a href="/" class="logo m-0 float-start">Study<span class="text-primary">.</span> </a>
-
-
+        <a href="/" class="logo m-0 float-start">Into the vegan<span class="text-primary">.</span> </a>
 
         <a href="#" class="burger ml-auto float-end site-menu-toggle light js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
           <span></span>
         </a>
         <ul class="site-menu float-end d-none d-md-block">
 
-
           <li class="nav-item">
-            <p
-                    class="nav-link active"
-                    sec:authorize="isAuthenticated()"
-                    sec:authentication="name">
-            </p>
-
-          </li>
-
-
-          <li class="nav-item">
-            <a class="nav-link active" th:href="@{/}">홈</a>
-          </li>
-
-
-          <li class="nav-item">
-            <!-- 관리자만 -->
             <a
                     class="nav-link active"
-                    sec:authorize="hasAnyRole('ROLE_ADMIN')"
-                    th:href="@{/admin/page}"
-            >
+                    th:href="@{/modify}"
+                    sec:authorize="isAuthenticated()"
+                    >
+              <input th:placeholder="${session.user.username}"
+                     th:value="${session.user.username}" name="userName" id="userName" readonly>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" th:href="@{/}"> Home </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/admin/page}">
               관리자 페이지
             </a>
           </li>
 
-
-
           <li class="nav-item">
-            <!-- 로그인한 사람 모두 -->
-            <a
-                    class="nav-link active"
-                    sec:authorize="isAuthenticated()"
-                    th:href="@{/notice}"
-            >
-              공지사항
-            </a>
+            <a class="nav-link active" th:href="@{/recipe}"> Recipe </a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link active" th:href="@{/place}"> Place </a>
+          </li>
 
 
           <li class="nav-item">
             <!-- 유저만 -->
             <a
                     class="nav-link active"
-                    sec:authorize="hasAnyRole('ROLE_USER')"
-                    th:href="@{/note}"
+                    authorize="isAuthenticated()"
+                    th:href="@{/board}"
             >
-              개인노트
+              Community
             </a>
           </li>
 
@@ -114,7 +95,7 @@
             <a
                     class="nav-link active"
                     sec:authorize="!isAuthenticated()"
-                    th:href="@{/login}"
+                    th:href="@{/auth/login}"
             >
               로그인
             </a>
@@ -125,7 +106,7 @@
             <a
                     class="nav-link active"
                     sec:authorize="!isAuthenticated()"
-                    th:href="@{/signup}"
+                    th:href="@{/auth/join}"
             >
               회원가입
             </a>

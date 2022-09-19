@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 
@@ -22,7 +23,7 @@ public class User extends BaseTimeEntity {
     private String username; // 아이디
 
     @Column(nullable = false, unique = true)
-    private String nickname;
+    private String name;
 
     @Column(length = 100)
     private String password;
@@ -36,7 +37,7 @@ public class User extends BaseTimeEntity {
 
     /* 회원정보 수정 */
     public void modify(String nickname, String password) {
-        this.nickname = nickname;
+        this.name = nickname;
         this.password = password;
     }
 

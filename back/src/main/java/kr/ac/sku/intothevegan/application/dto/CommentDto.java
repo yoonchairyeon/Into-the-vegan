@@ -61,7 +61,7 @@ public class CommentDto {
             this.comment = comment.getComment();
             this.createdDate = comment.getCreatedDate();
             this.modifiedDate = comment.getModifiedDate();
-            this.nickname = comment.getUser().getNickname();
+            this.nickname = comment.getUser().getName();
             this.userId = comment.getUser().getId();
             this.postsId = comment.getPosts().getId();
         }

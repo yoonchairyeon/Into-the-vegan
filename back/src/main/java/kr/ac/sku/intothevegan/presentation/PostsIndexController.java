@@ -7,7 +7,6 @@ import kr.ac.sku.intothevegan.application.dto.UserDto;
 import kr.ac.sku.intothevegan.application.security.auth.LoginUser;
 import kr.ac.sku.intothevegan.domain.Posts;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -29,9 +28,12 @@ public class PostsIndexController {
 
     private final PostsService postsService;
 
+    //커뮤니티
     @GetMapping("/board")                 /* default page = 0, size = 10  */
-    public String index(Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC)
-            Pageable pageable, @LoginUser UserDto.Response user) {
+    public String index(Model model,
+                        @PageableDefault(sort = "id", direction = Sort.Direction.DESC)
+            Pageable pageable,
+                        @LoginUser UserDto.Response user) {
         Page<Posts> list = postsService.pageList(pageable);
 
         if (user != null) {
@@ -39,12 +41,12 @@ public class PostsIndexController {
         }
 
         model.addAttribute("posts", list);
-        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-        model.addAttribute("next", pageable.next().getPageNumber());
-        model.addAttribute("hasNext", list.hasNext());
-        model.addAttribute("hasPrev", list.hasPrevious());
+//        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+//        model.addAttribute("next", pageable.next().getPageNumber());
+//        model.addAttribute("hasNext", list.hasNext());
+//        model.addAttribute("hasPrev", list.hasPrevious());
 
-        return "/index";
+        return "posts/index";
     }
     /* 글 작성 */
     @GetMapping("/posts/write")

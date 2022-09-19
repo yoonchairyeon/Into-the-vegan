@@ -30,8 +30,8 @@ public class UserDto {
         private String password;
 
         @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-_]{2,10}$", message = "닉네임은 특수문자를 제외한 2~10자리여야 합니다.")
-        @NotBlank(message = "닉네임은 필수 입력 값입니다.")
-        private String nickname;
+        @NotBlank(message = "이름은 필수 입력 값입니다.")
+        private String name;
 
         @Pattern(regexp = "^(?:\\w+\\.?)*\\w+@(?:\\w+\\.)+\\w+$", message = "이메일 형식이 올바르지 않습니다.")
         @NotBlank(message = "이메일은 필수 입력 값입니다.")
@@ -45,7 +45,7 @@ public class UserDto {
                     .id(id)
                     .username(username)
                     .password(password)
-                    .nickname(nickname)
+                    .name(name)
                     .email(email)
                     .role(role.USER)
                     .build();
@@ -65,7 +65,7 @@ public class UserDto {
 
         private final Long id;
         private final String username;
-        private final String nickname;
+        private final String name;
         private final String email;
         private final Role role;
         private final String modifiedDate;
@@ -74,7 +74,7 @@ public class UserDto {
         public Response(User user) {
             this.id = user.getId();
             this.username = user.getUsername();
-            this.nickname = user.getNickname();
+            this.name = user.getName();
             this.email = user.getEmail();
             this.role = user.getRole();
             this.modifiedDate = user.getModifiedDate();

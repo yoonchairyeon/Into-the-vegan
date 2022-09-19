@@ -46,7 +46,7 @@ public class UserController {
 
     /* 회원가입 */
     @PostMapping("/auth/joinProc")
-    public String joinProc(@Valid @ModelAttribute UserDto.Request dto, Errors errors, Model model) {
+    public String joinProc(@Valid UserDto.Request dto, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("userDto", dto);
             /* 유효성 통과 못한 필드와 메시지를 핸들링 */

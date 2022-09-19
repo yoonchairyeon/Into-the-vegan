@@ -21,7 +21,7 @@ public class PostsApiController {
     /* CREATE */
     @PostMapping("/posts")
     public ResponseEntity save(@RequestBody PostsDto.Request dto, @LoginUser UserDto.Response user) {
-        return ResponseEntity.ok(postsService.save(dto, user.getNickname()));
+        return ResponseEntity.ok(postsService.save(dto, user.getName()));
     }
 
     /* READ */

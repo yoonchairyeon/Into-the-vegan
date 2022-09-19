@@ -462,8 +462,14 @@ progress {
     content: "\2014\00A0"; }
 
 .img-fluid {
-  max-width: 100%;
-  height: auto; }
+  text-align: center;
+  margin: auto;
+  display: block;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+}
 
 .img-thumbnail {
   padding: 0.25rem;
@@ -6300,7 +6306,7 @@ textarea.form-control-lg {
   text-align: center !important; }
 
 .text-primary {
-  color: #fc5404 !important; }
+  color: #fff86c !important; }
 
 .text-secondary {
   color: #6c757d !important; }
@@ -8645,11 +8651,13 @@ textarea.form-control-lg {
   position: relative; }
 
 .logo {
-  font-size: 20px;
-  color: #2851b7;
+  font-size: 40px;
+  color: #5A7E49;
   font-weight: 700;
+  text-align: center;
   top: 6px;
-  position: relative; }
+
+ }
   .logo:hover {
     color: #fff; }
 

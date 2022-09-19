@@ -5,7 +5,6 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <meta name="author" content="Untree.co">
   <link rel="shortcut icon" href="favicon.png">
 
@@ -16,20 +15,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto&display=swap"
         rel="stylesheet">
 
-  <link rel="stylesheet" href="fonts/icomoon/style.css">
-  <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
   <link rel="stylesheet" href="css/tiny-slider.css">
   <link rel="stylesheet" href="css/aos.css">
   <link rel="stylesheet" href="css/glightbox.min.css">
   <link rel="stylesheet" href="css/style.css">
 
 
-
-
   <title>로그인</title>
 </head>
-<div th:replace="fragments/bodyHeader :: bodyHeader" />
 <body>
+<div th:replace="fragments/bodyHeader :: bodyHeader" />
+
 <div class="section sec-5">
   <div class="container">
 
@@ -48,8 +45,8 @@
         <input type="checkbox" id="remember-me" name="remember-me" class="form-check-input mt-0" autocomplete="off">
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
-      <a href="/oauth2/authorization/naver" role="button" class="btn btn-outline-success"><img id="img" src="/img/naver.ico"/> 로그인</a>
-      <a href="/oauth2/authorization/google" role="button" class="btn btn-outline-danger bi bi-google"> 로그인</a>
+      <a href="/oauth2/authorization/naver" role="button" class="btn btn-outline-success">네이버 로그인</a>
+      <a href="/oauth2/authorization/google" role="button"> 구글 로그인</a>
     </form>
   </div>
 </div>
