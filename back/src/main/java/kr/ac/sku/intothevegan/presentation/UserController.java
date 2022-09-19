@@ -13,19 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Map;
 
-/**
- * 회원 관련 Controller
- */
+//회원 관련 Controller
 @RequiredArgsConstructor
 @Controller
 public class UserController {
@@ -51,11 +46,9 @@ public class UserController {
 
     /* 회원가입 */
     @PostMapping("/auth/joinProc")
-    public String joinProc(@Valid UserDto.Request dto, Errors errors, Model model) {
+    public String joinProc(@Valid @ModelAttribute UserDto.Request dto, Errors errors, Model model) {
         if (errors.hasErrors()) {
-             /* 회원가입 실패시 입력 데이터 값을 유지 */
             model.addAttribute("userDto", dto);
-
             /* 유효성 통과 못한 필드와 메시지를 핸들링 */
             Map<String, String> validatorResult = userService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {

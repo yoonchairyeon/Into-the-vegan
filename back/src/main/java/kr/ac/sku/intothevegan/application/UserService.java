@@ -24,9 +24,7 @@ public class UserService {
     /* 회원가입 */
     @Transactional
     public void userJoin(UserDto.Request dto) {
-
         dto.setPassword(encoder.encode(dto.getPassword()));
-
         userRepository.save(dto.toEntity());
     }
 
