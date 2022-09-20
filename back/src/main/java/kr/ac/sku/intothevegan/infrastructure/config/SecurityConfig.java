@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
-                .ignoring().antMatchers( "/css/**", "/js/**", "/img/**", "/board");
+                .ignoring().antMatchers( "/css/**", "/js/**", "/img/**", "/board" ,"/recipe","/maps");
     }
 
     @Override
@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().ignoringAntMatchers("/api/**") /* REST API 사용 예외처리 */
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/auth/**", "/posts/read/**", "/posts/search/**" ,"/board").permitAll()
+                .antMatchers("/", "/auth/**", "/posts/read/**", "/posts/search/**" ,"/board" ,"/recipe","/maps").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()

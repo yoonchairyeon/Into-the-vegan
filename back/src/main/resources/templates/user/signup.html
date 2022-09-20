@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 
   <!-- Required meta tags -->
@@ -40,6 +41,14 @@
         <input type="password" id="password" name="password" placeholder="Password" required>
       </p>
       <p>
+        <label for="confirmPassword" class="sr-only">비밀번호 재확인</label>
+        <input type="confirmPassword" id="confirmPassword" name="confirmPassword" placeholder="ConfirmPassword" required>
+      </p>
+      <p>
+        <label for="name" class="sr-only">이름</label>
+        <input type="name" id="name" name="name" placeholder="Name" required>
+      </p>
+      <p>
         <label for="email" class="sr-only">이메일</label>
         <input type="email" id="email" name="email" placeholder="Email" required>
       </p>
@@ -47,6 +56,64 @@
     </form>
   </div>
 </div>
+
+<th:block layout:fragment="script">
+  <script type="text/javascript">
+    $(function () {
+      $('.btn btn-lg btn-primary btn-block').click((e) => {
+        const id = $('#id').val();
+        const password = $('#password').val();
+        const confirmPassword = $('#confirmPassword').val()
+        const name = $('#name').val();
+        const email = $('#email').val();
+
+        if (id == '') {
+          alert('아이디를 입력해주세요');
+          e.preventDefault();
+        }
+        if (password == '') {
+          alert('패스워드를 입력해주세요');
+          e.preventDefault();
+        }
+        if (name == '') {
+          alert('이름을 입력해주세요');
+          e.preventDefault();
+        }
+        if (email == '') {
+          alert('이메일을 입력해주세요');
+          e.preventDefault();
+        }
+        if (password != confirmPassword) {
+          alert('비밀번호가 일치하지 않습니다.')
+          e.preventDefault();
+        } else {
+          const path = 'http://localhost:8080/api/signup';
+          const json = JSON.stringify({
+            'id': id,
+            'password': password,
+            'name': name
+          });
+          $.ajax({
+            url: path,
+            type: 'POST',
+            contentType: 'application/json',
+            data: json,
+          }).done((response) => {
+            if (response == 'success') {
+              alert('회원가입 성공')
+              location.href = "http://localhost:8080"
+            } else if (response == 'fail') {
+              alert('아이디를 변경하세요.');
+            } else {
+              alert('회원가입 실패');
+            }
+          });
+        }
+      });
+    });
+  </script>
+</th:block>
+
 <div th:replace="fragments/footer :: footer2"/>
 </body>
 </html>

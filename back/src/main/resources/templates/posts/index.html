@@ -84,14 +84,12 @@
 
 
                 <form th:action="@{/board}" method="get">
-                    <input type="text" name="searchKeyword">
+                    <br> <input type="text" name="searchKeyword">
                     <button type="submit">검색</button>
                 </form>
             </div>
         </div>
     </div>
-
-    <div th:replace="fragments/footer :: footer2"/>
 </div>
 </body>
 </html>

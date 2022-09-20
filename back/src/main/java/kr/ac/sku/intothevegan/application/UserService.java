@@ -23,9 +23,11 @@ public class UserService {
 
     /* 회원가입 */
     @Transactional
-    public void userJoin(UserDto.Request dto) {
+    public Long userJoin(UserDto.Request dto) {
         dto.setPassword(encoder.encode(dto.getPassword()));
-        userRepository.save(dto.toEntity());
+        User user = dto.toEntity();
+        userRepository.save(user);
+        return user.getId();
     }
 
     /* 회원가입 시, 유효성 검사 및 중복 체크 */

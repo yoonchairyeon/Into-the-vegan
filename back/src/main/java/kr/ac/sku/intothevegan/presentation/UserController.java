@@ -45,7 +45,7 @@ public class UserController {
     }
 
     /* 회원가입 */
-    @PostMapping("/auth/joinProc")
+    @PostMapping("/auth/join")
     public String joinProc(@Valid UserDto.Request dto, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("userDto", dto);
