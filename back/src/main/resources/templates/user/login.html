@@ -1,16 +1,10 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}"
->
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Untree.co">
-  <link rel="shortcut icon" href="favicon.png">
-
   <meta name="description" content=""/>
   <meta name="keywords" content="bootstrap, bootstrap5"/>
 
@@ -18,12 +12,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto&display=swap"
         rel="stylesheet">
 
-
-  <link rel="stylesheet" href="css/tiny-slider.css">
-  <link rel="stylesheet" href="css/aos.css">
-  <link rel="stylesheet" href="css/glightbox.min.css">
-  <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="../css/tiny-slider.css">
+  <link rel="stylesheet" href="../css/aos.css">
+  <link rel="stylesheet" href="../css/glightbox.min.css">
+  <link rel="stylesheet" href="../css/style.css">
 
   <title>로그인</title>
 </head>
@@ -33,7 +25,7 @@
 <div class="section sec-5">
   <div class="container">
 
-    <form class="form-signin" method="post" th:action="@{/login}">
+    <form class="form-signin" method="post" th:action="@{/auth/login}">
       <h2 class="form-signin-heading">로그인</h2>
       <p>
         <label for="username" class="sr-only">Username</label>
@@ -48,53 +40,14 @@
         <input type="checkbox" id="remember-me" name="remember-me" class="form-check-input mt-0" autocomplete="off">
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+
+      <a href="/oauth2/authorization/naver" role="button">네이버 로그인</a>
+      <a href="/oauth2/authorization/google" role="button"> 구글 로그인</a>
     </form>
-    <a href="/oauth2/authorization/naver" role="button">네이버 로그인</a>
-    <a href="/oauth2/authorization/google" role="button"> 구글 로그인</a>
+
+
   </div>
 </div>
-
-<th:block layout:fragment="script">
-  <script type="text/javascript">
-    $(function () {
-      $('.btn btn-lg btn-primary btn-block').click((e) => {
-        const id = $('#id').val();
-        const password = $('#password').val();
-
-        if (id == '') {
-          alert('아이디를 입력해주세요');
-          e.preventDefault();
-        }
-        if (password == '') {
-          alert('패스워드를 입력해주세요');
-          e.preventDefault();
-        }
-
-        if (id != '' && password !='') {
-          const path = 'http://localhost:8080/api/login';
-          const json = JSON.stringify({
-            'id': id,
-            'password': password,
-          });
-          $.ajax({
-            url: path,
-            type: 'POST',
-            contentType: 'application/json',
-            data: json,
-          }).done((response) => {
-            if (response == 'success') {
-              alert('로그인 성공')
-              localStorage.setItem('id', id);
-              location.href = "http://localhost:8080"
-            } else {
-              alert(response);
-            }
-          });
-        }
-      });
-    });
-  </script>
-</th:block>
 
 <div th:replace="fragments/footer :: footer2"/>
 </body>

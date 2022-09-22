@@ -38,32 +38,36 @@
 
                     <thead>
                     <tr>
-                        <th scope="col-md-1">#</th>
+                        <th scope="col-md-1">번호</th>
                         <th scope="col-md-5">제목</th>
                         <th scope="col-md-2">작성자</th>
                         <th scope="col-md-2">작성일</th>
-                        <!--   <th scope="col-md-2">조회수</th>-->
+                        <th scope="col-md-2">조회수</th>
                     </tr>
                     </thead>
 
                     <tbody>
                     <tr th:each="post : ${posts}">
                         <th>
-                            <span th:text="${posts.number}"></span>
+                            <span th:text="${post.id}"></span>
                         </th>
 
                         <td>
-                            <a th:href="@{'/posts/' + ${post.id}}">
+                            <a th:href="@{'/posts/' + ${post.title}}">
                                 <span th:text="${post.title}"></span>
                             </a>
                         </td>
 
                         <td>
-<!--                            <span th:text="${post.author}"></span>-->
+                            <span th:text="${post.writer}"></span>
                         </td>
 
                         <td>
                             <span th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                        </td>
+
+                        <td>
+                            <span th:text="${post.view}"></span>
                         </td>
 
                     </tr>

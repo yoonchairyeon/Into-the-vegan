@@ -53,8 +53,8 @@
                     th:href="@{/modify}"
                     sec:authorize="isAuthenticated()"
                     >
-              <input th:placeholder="${session.user.username}"
-                     th:value="${session.user.username}" name="userName" id="userName" readonly>
+              <input th:placeholder="${session.user.name}"
+                     th:value="${session.user.name}" name="userName" id="userName" readonly>
             </a>
           </li>
 
@@ -88,9 +88,7 @@
             </a>
           </li>
 
-
           <li class="nav-item">
-            <!-- 로그인 안한 사람만 -->
             <a
                     class="nav-link active"
                     sec:authorize="!isAuthenticated()"
@@ -101,7 +99,6 @@
           </li>
 
           <li class="nav-item">
-            <!-- 로그인 안한 사람만 -->
             <a
                     class="nav-link active"
                     sec:authorize="!isAuthenticated()"

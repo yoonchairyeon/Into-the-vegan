@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
-                .ignoring().antMatchers( "/css/**", "/js/**", "/img/**", "/board" ,"/recipe","/maps");
+                .ignoring().antMatchers( "/css/**", "/js/**", "/img/**", "/board" ,"/recipe","/maps" );
     }
 
     @Override
@@ -64,21 +64,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/auth/**", "/posts/read/**", "/posts/search/**" ,"/board" ,"/recipe","/maps").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .oauth2Login()
-                .userInfoEndpoint() // OAuth2 로그인 성공 후 가져올 설정들
-                .userService(customOAuth2UserService); // 서버에서 사용자 정보를 가져온 상태에서 추가로 진행하고자 하는 기능 명시
-        // login
-        http.formLogin()
+                .formLogin()
                 .loginPage("/auth/login")
                 .loginProcessingUrl("/auth/loginProc")
                 .failureHandler(customFailureHandler)
                 .defaultSuccessUrl("/")
-                .permitAll(); // 모두 허용
-        // logout
-        http.logout()
+                .and()
+                .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .invalidateHttpSession(true).deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint() // OAuth2 로그인 성공 후 가져올 설정들
+                .userService(customOAuth2UserService)
+                ; // 서버에서 사용자 정보를 가져온 상태에서 추가로 진행하고자 하는 기능 명시
+
 
         http.cors().and();
 
