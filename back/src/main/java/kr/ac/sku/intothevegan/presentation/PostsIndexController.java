@@ -42,10 +42,10 @@ public class PostsIndexController {
         }
 
         model.addAttribute("posts", list);
-//        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-//        model.addAttribute("next", pageable.next().getPageNumber());
-//        model.addAttribute("hasNext", list.hasNext());
-//        model.addAttribute("hasPrev", list.hasPrevious());
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("hasNext", list.hasNext());
+        model.addAttribute("hasPrev", list.hasPrevious());
 
         return "posts/index";
     }
@@ -55,7 +55,7 @@ public class PostsIndexController {
         if (user != null) {
             model.addAttribute("user", user.getName());
         }
-        return "/posts/write";
+        return "posts/write";
     }
 
     /* 글 상세보기 */

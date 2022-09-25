@@ -14,12 +14,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
-    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-    <link rel="stylesheet" href="css/tiny-slider.css">
-    <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/glightbox.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/tiny-slider.css">
+    <link rel="stylesheet" href="../css/aos.css">
+    <link rel="stylesheet" href="../css/glightbox.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Community</title>
 </head>
 
@@ -49,7 +47,7 @@
                     <tbody>
                     <tr th:each="post : ${posts}">
                         <th>
-                            <span th:text="${post.id}"></span>
+                            <span th:text="${posts.number}"></span>
                         </th>
 
                         <td>
@@ -87,7 +85,7 @@
 <!--                </th:block>-->
 
 
-                <form th:action="@{/board}" method="get">
+                <form th:action="@{/board}" method="post">
                     <br> <input type="text" name="searchKeyword">
                     <button type="submit">검색</button>
                 </form>

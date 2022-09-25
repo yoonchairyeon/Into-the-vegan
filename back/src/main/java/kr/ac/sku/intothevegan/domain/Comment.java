@@ -37,7 +37,7 @@ public class Comment {
     private Posts posts;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "username")
     private User user; // 작성자
 
     /* 댓글 수정 */
