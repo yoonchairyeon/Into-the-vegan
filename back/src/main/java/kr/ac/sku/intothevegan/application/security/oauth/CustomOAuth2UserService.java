@@ -1,6 +1,7 @@
 package kr.ac.sku.intothevegan.application.security.oauth;
 
 import kr.ac.sku.intothevegan.application.dto.UserDto;
+import kr.ac.sku.intothevegan.application.dto.UserSessionDto;
 import kr.ac.sku.intothevegan.domain.User;
 import kr.ac.sku.intothevegan.infrastructure.persistence.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -48,7 +49,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         User user = saveOrUpdate(attributes);
 
         /* 세션 정보를 저장하는 직렬화된 dto 클래스 */
-        session.setAttribute("user", new UserDto.Response(user));
+        session.setAttribute("user", new UserSessionDto(user));
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRoleValue())),

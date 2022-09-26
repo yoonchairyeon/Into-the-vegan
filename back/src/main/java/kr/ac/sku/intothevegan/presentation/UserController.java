@@ -3,6 +3,7 @@ package kr.ac.sku.intothevegan.presentation;
 
 import kr.ac.sku.intothevegan.application.UserService;
 import kr.ac.sku.intothevegan.application.dto.UserDto;
+import kr.ac.sku.intothevegan.application.dto.UserSessionDto;
 import kr.ac.sku.intothevegan.application.security.auth.LoginUser;
 import kr.ac.sku.intothevegan.application.validator.CustomValidators;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Map;
 
@@ -28,14 +30,12 @@ public class UserController {
     private final UserService userService;
 
     private final CustomValidators.EmailValidator EmailValidator;
-    private final CustomValidators.NicknameValidator NicknameValidator;
     private final CustomValidators.UsernameValidator UsernameValidator;
 
     /* 커스텀 유효성 검증을 위해 추가 */
     @InitBinder
     public void validatorBinder(WebDataBinder binder) {
         binder.addValidators(EmailValidator);
-        binder.addValidators(NicknameValidator);
         binder.addValidators(UsernameValidator);
     }
 
@@ -45,19 +45,9 @@ public class UserController {
     }
 
     /* 회원가입 */
-    @PostMapping("/auth/join")
-    public String joinProc(@Valid UserDto.Request dto, Errors errors, Model model) {
-        if (errors.hasErrors()) {
-            model.addAttribute("userDto", dto);
-            /* 유효성 통과 못한 필드와 메시지를 핸들링 */
-            Map<String, String> validatorResult = userService.validateHandling(errors);
-            for (String key : validatorResult.keySet()) {
-                model.addAttribute(key, validatorResult.get(key));
-            }
-            /* 회원가입 페이지로 다시 리턴 */
-            return "/user/signup";
-        }
-        userService.userJoin(dto);
+    @PostMapping("/auth/joinProc")
+    public String join( UserDto userDto) {
+        userService.Join(userDto);
         return "redirect:/auth/login";
     }
 
@@ -83,10 +73,10 @@ public class UserController {
 
     /* 회원정보 수정 */
     @GetMapping("/modify")
-    public String modify(@LoginUser UserDto.Response user, Model model) {
+    public String modify(@LoginUser UserSessionDto user, Model model) {
         if (user != null) {
             model.addAttribute("user", user);
         }
-        return "/user/usermodify";
+        return "user/usermodify";
     }
 }

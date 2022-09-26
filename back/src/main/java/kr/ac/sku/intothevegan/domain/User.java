@@ -23,21 +23,21 @@ public class User extends BaseTimeEntity {
     private String username; // 아이디
 
     @Column(nullable = false, unique = true)
-    private String name;
+    private String name; //이름
 
-    @Column(length = 100)
-    private String password;
+    @Column(nullable = false, length = 100)
+    private String password; //비밀번호
 
     @Column(nullable = false, length = 50, unique = true)
-    private String email;
+    private String email; //이메일
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
     /* 회원정보 수정 */
-    public void modify(String nickname, String password) {
-        this.name = nickname;
+    public void modify(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 

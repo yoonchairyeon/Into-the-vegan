@@ -1,6 +1,7 @@
 package kr.ac.sku.intothevegan.application;
 
 import kr.ac.sku.intothevegan.application.dto.UserDto;
+import kr.ac.sku.intothevegan.application.dto.UserSessionDto;
 import kr.ac.sku.intothevegan.domain.User;
 import kr.ac.sku.intothevegan.infrastructure.persistence.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +24,11 @@ public class UserService {
 
     /* 회원가입 */
     @Transactional
-    public Long userJoin(UserDto.Request dto) {
+    public Long Join(UserDto dto) {
+
         dto.setPassword(encoder.encode(dto.getPassword()));
-        User user = dto.toEntity();
-        userRepository.save(user);
-        return user.getId();
+
+        return userRepository.save(dto.toEntity()).getId();
     }
 
     /* 회원가입 시, 유효성 검사 및 중복 체크 */
@@ -45,11 +46,11 @@ public class UserService {
 
     /* 회원수정 (dirty checking) */
     @Transactional
-    public void modify(UserDto.Request dto) {
+    public void modify(UserDto dto) {
         User user = userRepository.findById(dto.toEntity().getId()).orElseThrow(() ->
                 new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
 
         String encPassword = encoder.encode(dto.getPassword());
-        user.modify(dto.getName(), encPassword);
+        user.modify(dto.getEmail(), encPassword);
     }
 }
