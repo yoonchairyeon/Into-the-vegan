@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
-import Index from "views/Index.js";
-import Join from "views/examples/Join.js";
-import NucleoIcons from "views/NucleoIcons.js";
+import Index from "./views/Index.js";
+import Join from "./views/examples/Join.js";
+import NucleoIcons from "./views/NucleoIcons.js";
 
 ReactDOM.render(
   <BrowserRouter>

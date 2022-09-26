@@ -3,9 +3,11 @@ package kr.ac.sku.intothevegan.application.dto;
 import kr.ac.sku.intothevegan.domain.Role;
 import kr.ac.sku.intothevegan.domain.User;
 import lombok.Getter;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.Serializable;
 
+@ResponseBody
 @Getter
 public class UserSessionDto implements Serializable {
     private String username;
@@ -14,6 +16,8 @@ public class UserSessionDto implements Serializable {
     private String email;
     private Role role;
     private String modifiedDate;
+
+    public UserSessionDto(){}
 
     /* Entity -> Dto */
     public UserSessionDto(User user) {

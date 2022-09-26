@@ -51,21 +51,21 @@
                         </th>
 
                         <td>
-                            <a th:href="@{'/posts/' + ${post.title}}">
-                                <span th:text="${post.title}"></span>
+                            <a th:href="@{'/posts/' + ${posts.title}}">
+                                <span th:text="${posts.title}"></span>
                             </a>
                         </td>
 
                         <td>
-                            <span th:text="${post.writer}"></span>
+                            <span th:text="${posts.writer}"></span>
                         </td>
 
                         <td>
-                            <span th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                            <span th:text="${#temporals.format(posts.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
                         </td>
 
                         <td>
-                            <span th:text="${post.view}"></span>
+                            <span th:text="${posts.view}"></span>
                         </td>
 
                     </tr>
@@ -93,5 +93,7 @@
         </div>
     </div>
 </div>
+<div th:replace="fragments/footer :: footer2"/>
+
 </body>
 </html>

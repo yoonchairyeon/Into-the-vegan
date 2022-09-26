@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().ignoringAntMatchers("/api/**")/* REST API 사용 예외처리 */
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/auth/**", "/posts/read/**", "/posts/search/**" ,"/board" ,"/recipe","/maps")
+                .antMatchers("/", "/auth/**", "/posts/read/**", "/posts/search/**" ,"/board" ,"/recipe","/maps" ,"api/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -72,23 +72,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
 
-//                 .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/auth/login")
-//                .loginProcessingUrl("/auth/loginProc")
-//               // .failureHandler(customFailureHandler)
-//                .defaultSuccessUrl("/")
-//                .and()
-//                .logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .invalidateHttpSession(true).deleteCookies("JSESSIONID")
-//                .logoutSuccessUrl("/")
-//                .and()
-//                .oauth2Login()
-//                .userInfoEndpoint() // OAuth2 로그인 성공 후 가져올 설정들
-//             //   .userService(customOAuth2UserService)
-//                ; // 서버에서 사용자 정보를 가져온 상태에서 추가로 진행하고자 하는 기능 명시
 //
 //
 //        http.cors().and();

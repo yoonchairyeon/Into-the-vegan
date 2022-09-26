@@ -3,13 +3,12 @@
 import React, { Component } from 'react';
 import { Button, Card, Form, Input, Container, Row, Col, UncontrolledTooltip } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faFingerprint, faLock, faEnvelope, faPhone, faHouse, faCakeCandles } from '@fortawesome/free-solid-svg-icons'
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import UserService from "service/UserService";
-import VeginFooter from "components/Footers/Footer";
+import Footer from "components/Footers/Footer";
 
 /* 회원가입 페이지 */
-class JoinPage extends Component {
+class Join extends Component {
 
     constructor(props) {
         super(props)
