@@ -25,11 +25,11 @@ public class PostsService {
     @Transactional
     public Long save(PostsDto.Request dto, String name) {
         /* User 정보를 가져와 dto에 담아준다. */
-//        User user = userRepository.findByname(name);
-//        dto.setUser(user);
-//        log.info("PostsService save() 실행");
-//        Posts posts = dto.toEntity();
-//        postsRepository.save(posts);
+        User user = userRepository.findByname(name);
+        dto.setUser(user);
+        log.info("PostsService save() 실행");
+        Posts posts = dto.toEntity();
+        postsRepository.save(posts);
 
         return postsRepository.save(dto.toEntity()).getId();
     }

@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Security 설정 클래스
@@ -60,20 +61,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/auth/**", "/posts/read/**", "/posts/search/**" ,"/board" ,"/recipe","/maps" ,"api/**")
                 .permitAll()
-                .anyRequest()
-                .authenticated()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/auth/login")
-                .loginProcessingUrl("/loginProc")
+                .loginProcessingUrl("/auth/loginProc")
                 .defaultSuccessUrl("/")
                 .and()
                 .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .invalidateHttpSession(true).deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/")
-                .invalidateHttpSession(true);
+                .and() /* OAuth */
+                .oauth2Login()
+                .userInfoEndpoint() // OAuth2 로그인 성공 후 가져올 설정들
+                .userService(customOAuth2UserService);
 
-//
-//
 //        http.cors().and();
 //
 //        http.csrf().disable();

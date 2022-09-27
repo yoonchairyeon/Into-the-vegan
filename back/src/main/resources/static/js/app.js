@@ -2,7 +2,6 @@ const main = {
     init : function() {
         const _this = this;
 
-
         // 게시글 저장
         $('#btn-save').on('click', function () {
             _this.save();
