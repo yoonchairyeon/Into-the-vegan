@@ -3,7 +3,7 @@ import React from "react";
 // reactstrap components
 import { Row, Container } from "reactstrap";
 
-function VeginFooter() {
+function Footer() {
   return (
     <footer className="footer footer-black footer-white">
       <hr></hr>

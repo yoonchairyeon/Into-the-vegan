@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -25,7 +26,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final CustomUserDetailsService customUserDetailsService;
 //
-//    private final AuthenticationFailureHandler customFailureHandler;
+    private final AuthenticationFailureHandler customFailureHandler;
 //
     private final CustomOAuth2UserService customOAuth2UserService;
 
@@ -50,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
-                .ignoring().antMatchers( "/css/**", "/js/**", "/img/**");
+                .ignoring().antMatchers( "/css/**", "/js/**", "/img/**","/error");
     }
 
     @Override
@@ -77,9 +78,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userInfoEndpoint() // OAuth2 로그인 성공 후 가져올 설정들
                 .userService(customOAuth2UserService);
 
-//        http.cors().and();
-//
-//        http.csrf().disable();
+       http.cors().and();
+
+        http.csrf().disable();
 
     }
 }
