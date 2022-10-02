@@ -1,32 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta name="author" content="Untree.co">
-  <link rel="shortcut icon" href="favicon.png">
-
-  <meta name="description" content="" />
-  <meta name="keywords" content="bootstrap, bootstrap5" />
-
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/tiny-slider.css">
-  <link rel="stylesheet" href="css/aos.css">
-  <link rel="stylesheet" href="css/glightbox.min.css">
-  <link rel="stylesheet" href="css/style.css">
-
-  <title>Into-the-vegan</title>
+  <meta charset="UTF-8">
+  <title>Home</title>
 </head>
-
 <body>
-<div th:replace="fragments/bodyHeader :: bodyHeader" />
-<div class="img-fluid">
-  <img src="img/logo.png" style=" width: 1300px; height: 300px;" >
-</div>
-
+<h2>Input date you want to see</h2>
+<h3>Example: 20220101</h3>
+<form method="POST" action="/apis">
+  <input type="text" name="date" th:value="${date}"/>
+  <input type="submit" value="CLick"/>
+</form>
 </body>
 </html>

@@ -1,0 +1,189 @@
+@font-face {
+   font-family: 'category-font-l';
+   src: url('../../fonts/category-font/NIXGONFONTS-L-2.0.ttf');
+}
+
+@font-face {
+   font-family: 'category-font-m';
+   src: url('../../fonts/category-font/NIXGONFONTS-M-2.0.ttf');
+}
+
+@font-face {
+   font-family: 'main-font-l';
+   src: url('../../fonts/main-font/KoPubWorld-Dotum-Light.ttf');
+}
+
+@font-face {
+   font-family: 'main-font-m';
+   src: url('../../fonts/main-font/KoPubWorld-Dotum-Medium.ttf');
+}
+.recipe-best-table,
+.shop-best-table,
+.place-best-table,
+.community-best-table {
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: auto auto auto auto;
+    width:100%;
+    padding-left: 0;
+    margin-bottom: 0;
+
+    li, .item {
+        display:inline-block;
+        vertical-align:middle;
+        margin-bottom: 10px;
+        margin-top: 3vh;
+        padding: 0;
+        .item-img {
+            width: 230px;
+            height: 250px;
+            border: 1px solid #aaaaaa;
+            object-fit: cover;
+        }
+        #recipeTitle {
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #shopTitle {
+            height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .recipe-text,
+        .shop-text {
+            padding: 0.2vw;
+            margin: 0.34vw 0.2vw;
+        }
+        .nav-link {
+            padding: 0;
+        }
+    }
+}
+
+
+.item-title {
+    width: 200px;
+    padding: 5px;
+    font-family: 'main-font-m';
+    font-size: 17px;
+    color: black;
+    border-bottom: 1px solid #aaaaaa;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#commTitle {
+    white-space: nowrap;
+}
+
+.shop-text {
+    width: 200px;
+    padding: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.shop-per {
+    font-family: 'main-font-l';
+    font-weight: bold;
+    color: #4A8451;
+}
+
+.shop-price {
+    font-family: 'main-font-m';
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+
+.shop-strike-price {
+    font-family: 'main-font-l';
+    font-size: small;
+    text-decoration : line-through;
+    color: #aaaaaa;
+}
+
+.recipe-text {
+    width: 200px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 11px;
+    margin-right: 11px;
+    font-family: 'main-font-m';
+    color: black;
+}
+
+.place-text {
+    width: 200px;
+    white-space: nowrap;
+    overflow : hidden;
+    text-overflow : ellipsis;
+    margin-top: 2px;
+    margin-bottom: 4px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: 'main-font-l';
+    color: #66615b;
+}
+
+#placeType, #placeAddr {
+    font-size: small;
+}
+
+#placeIntro {
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: black;
+}
+#placeTime {
+    font-size: small;
+    color: black;
+}
+
+.community-type {
+    width: max-content;
+    padding-top: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    font-family: 'main-font-m';
+    font-size: x-small;
+    color: black;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.community-text {
+    width: 200px;
+    white-space: nowrap;
+    overflow : hidden;
+    text-overflow : ellipsis;
+    margin-top: 0px;
+    margin-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-family: 'main-font-l';
+    color: #aaaaaa;
+}
+
+#commContent {
+    margin-top: 8px;
+    font-size: 14px;
+    color: black;
+}
+
+#commWriter, #commDate, #commType2 {
+    font-size: small;
+    padding: 0px 1px;
+    color: black;
+}
+
+.place-main {
+    padding: 0% 15%;
+    position: relative;
+}

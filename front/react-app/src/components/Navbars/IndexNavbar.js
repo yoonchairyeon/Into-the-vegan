@@ -1,3 +1,21 @@
+/*!
+
+=========================================================
+* Paper Kit React - v1.3.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/paper-kit-react
+
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/paper-kit-react/blob/main/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
 import React, { useState, useEffect } from "react";
 // nodejs library that concatenates strings
 import classnames from "classnames";
@@ -16,6 +34,7 @@ import {
   DropdownItem,
   Container,
 } from "reactstrap";
+
 import MemberService from "service/MemberService";
 
 function IndexNavbar() {
@@ -31,8 +50,14 @@ function IndexNavbar() {
     if(window.location.pathname.includes("index")) {
       setActiveName("HOME");
     }
+    else if(window.location.pathname.includes("about")) {
+      setActiveName("ABOUT");
+    }
     else if(window.location.pathname.includes("recipe")) {
       setActiveName("RECIPE");
+    }
+    else if(window.location.pathname.includes("shop")) {
+      setActiveName("SHOP");
     }
     else if(window.location.pathname.includes("place")) {
       setActiveName("PLACE");
@@ -152,7 +177,51 @@ function IndexNavbar() {
                   <p>HOME</p>
                 </NavLink>
               </NavItem>
-              
+              <UncontrolledDropdown nav inNavbar className='in-dropdown-wrapper'>
+                <DropdownToggle 
+                  className={`in-dropdown ${activeName === "ABOUT" ? "active" : ""}`}
+                  style={{ height: '47px', padding: '0px 48px', margin: '15px 3px' }}
+                >
+                  ABOUT
+                  </DropdownToggle>
+                <DropdownMenu
+                  aria-labelledby="dropdownMenuButton"
+                  className='dropdown-info'
+                >
+                  <DropdownItem
+                    href="/about-vegan-page"
+                    className="in-dropdown-item"
+                  >
+                    VEGAN
+                      </DropdownItem>
+                  <DropdownItem
+                    href="/about-vegin-page"
+                    className="in-dropdown-item"
+                  >
+                    VEGIN
+                      </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+              <NavItem>
+                <NavLink
+                  className={`px-5 ${activeName === "RECIPE" ? "active" : ""}`}
+                  data-placement="bottom"
+                  href="/recipe-page"
+                  title="RECIPE"
+                >
+                  <p>RECIPE</p>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={`px-5 ${activeName === "SHOP" ? "active" : ""}`}
+                  data-placement="bottom"
+                  href="/shop-page"
+                  title="SHOP"
+                >
+                  <p>SHOP</p>
+                </NavLink>
+              </NavItem>
               <NavItem>
                 <NavLink
                   className={`px-5 ${activeName === "PLACE" ? "active" : ""}`}

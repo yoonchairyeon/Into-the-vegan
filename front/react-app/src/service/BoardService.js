@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BOARD_API_BASE_URL = "http://localhost:8080/board";
+const BOARD_API_BASE_URL = "http://localhost:8080/api/board";
 const DIARY_API_BASE_URL = "http://localhost:8080/api/diary";
 const COMMENT_API_BASE_URL = "http://localhost:8080/comment";
 const COMMENT_DIARY_API_BASE_URL = "http://localhost:8080/comment-diary";

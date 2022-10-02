@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const PLACE_API_BASE_URL = "http://localhost:8080/maps";
+const PLACE_API_BASE_URL = "http://localhost:8080/place-page/map";
 
 class PlaceService{
     getPlaces(){

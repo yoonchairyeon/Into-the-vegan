@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'home-title-font-l';
+    src: url('/assets/fonts/home-title-font/GmarketSansTTFLight.ttf');
+  }
+
+.featured-title{
+    font-family: 'home-title-font-l';
+    font-size: 24px;
+    text-align: center;
+    margin-top: 70px;
+}
+
+.nav-item {
+    .btn {
+        opacity: 1;
+    }
+  }
+
+.featured-list{
+    display:flex;
+    justify-content: center;
+    .featured-navbar{
+        box-shadow: none;
+    }  
+}
+
+.featured-img{
+    width: 24px;
+    height: 24px;
+    opacity: 0.5;
+}
+.featured-img-wrapper{
+    opacity: 1;
+}
+.featured-img-wrapper :hover{
+    margin-top: -10px;
+    opacity: 1;
+}
+.featured-link :hover,:active{
+    opacity: 1;
+
+}

@@ -1,86 +1,75 @@
 package kr.ac.sku.intothevegan.infrastructure.config;
 
-import kr.ac.sku.intothevegan.application.security.auth.CustomUserDetailsService;
-import kr.ac.sku.intothevegan.application.security.oauth.CustomOAuth2UserService;
-import lombok.RequiredArgsConstructor;
+
+import kr.ac.sku.intothevegan.application.service.MemberService;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-/**
- * Security 설정 클래스
- */
-@RequiredArgsConstructor
+import java.util.Arrays;
+import java.util.Collections;
+
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true) // 특정 주소로 접근하면 권한 및 인증을 미리 체크
+@AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final CustomUserDetailsService customUserDetailsService;
-//
-    private final AuthenticationFailureHandler customFailureHandler;
-//
-    private final CustomOAuth2UserService customOAuth2UserService;
+
+    private MemberService memberService;
 
     @Bean
-    public BCryptPasswordEncoder encoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-     return super.authenticationManagerBean();
-    }
-
-    /* 시큐리티가 로그인 과정에서 password를 가로챌때 어떤 해쉬로 암호화 했는지 확인 */
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(encoder());
-    }
-
-    /* static 관련설정은 무시 */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring().antMatchers( "/css/**", "/js/**", "/img/**","/error");
+        // 인증을 무시하기 위한 설정
+        web.ignoring().antMatchers("/css/**","/js/**","/img/**","/lib/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().ignoringAntMatchers("/api/**")/* REST API 사용 예외처리 */
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+
+        corsConfiguration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+
+        corsConfiguration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        corsConfiguration.setAllowedOriginPatterns(Arrays.asList("*"));
+        corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PUT","OPTIONS","PATCH"));
+        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.setExposedHeaders(Arrays.asList("Authorization"));
+
+        http.authorizeRequests()
+                .antMatchers("/**").permitAll().anyRequest()
+                .authenticated().and().csrf().disable().cors()
+                .configurationSource(request -> corsConfiguration)
                 .and()
-                .authorizeRequests()
-                .antMatchers("/", "/auth/**", "/posts/read/**", "/posts/search/**" ,"/board" ,"/recipe","/maps" ,"api/**")
+                .formLogin()     // 로그인 설정
+                .loginPage("/member/login")      // 커스텀 login 페이지를 사용
+                .defaultSuccessUrl("/member")      // 로그인 성공 시 이동할 페이지
                 .permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/auth/login")
-                .loginProcessingUrl("/auth/loginProc")
-                .defaultSuccessUrl("/")
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .invalidateHttpSession(true).deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/")
-                .and() /* OAuth */
-                .oauth2Login()
-                .userInfoEndpoint() // OAuth2 로그인 성공 후 가져올 설정들
-                .userService(customOAuth2UserService);
+                .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+                .logoutSuccessUrl("/member")
+                .invalidateHttpSession(true)    // 세션 초기화
+                .and()
+                .exceptionHandling();
+    }
 
-       http.cors().and();
-
-        http.csrf().disable();
-
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // 로그인 처리를 하기 위한 AuthenticationManagerBuilder를 설정
+        auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
     }
 }

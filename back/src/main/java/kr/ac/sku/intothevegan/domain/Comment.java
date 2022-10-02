@@ -1,47 +1,59 @@
 package kr.ac.sku.intothevegan.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Table(name = "comments")
 @Entity
+//@Table(name="comment")
+@EqualsAndHashCode(of="comment_no")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // @lombock ������̼� : �Ķ���͸� ���� �ʴ� �����ڸ� ������ش�.
+@AllArgsConstructor //  @lombock ������̼� : ��� �Ӽ��� ���ؼ� �����ڸ� ����� ����.
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "comment_no")
+    private Integer id;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
-    private String comment; // 댓글 내용
+    @NonNull
+    @Column(name = "content")
+    private String content;
 
-    @Column(name = "created_date")
-    @CreatedDate
-    private String createdDate;
+    @Column(name = "del_yn")
+    @ColumnDefault(value = "false")
+    private Boolean deleted;
 
-    @Column(name = "modified_date")
-    @LastModifiedDate
-    private String modifiedDate;
+    @Column(name="created_date")
+    private String created_date;
+
+    @Column(name="last_modified_date")
+    private String last_modified_date;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="board_no")
+    private Board board;
 
     @ManyToOne
-    @JoinColumn(name = "posts_id")
-    private Posts posts;
+    @JoinColumn(name="member_id")
+    private Member member;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user; // 작성자
+    public Comment(String content) {
+        this.content = content;
+        this.deleted = this.deleted == null ? false : this.deleted;
+        this.created_date = this.created_date == null ? (new Timestamp(System.currentTimeMillis())).toString() : this.created_date;
+    }
 
-    /* 댓글 수정 */
-    public void update(String comment) {
-        this.comment = comment;
+    // Member ��ƼƼ��  Board ��ƼƼ�� �����ϴ� �Լ�
+    public void changeAuthor(Member author) { this.member = author; }
+    public void changeBoard(Board board) {
+        this.board = board;
     }
 }
