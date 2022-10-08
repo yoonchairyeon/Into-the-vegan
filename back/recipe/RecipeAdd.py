@@ -5,7 +5,7 @@ import pymysql
 import RecipeCrawling
 
 # Connection 연결
-conn = pymysql.connect(host='localhost', port=3306, user='root', password='1234', db='vegindb', charset='utf8')
+conn = pymysql.connect(host='localhost', port=3306, user='cr', password='1234', db='cr', charset='utf8')
 
 # Connection으로부터 Cursor 생성
 curs = conn.cursor()
