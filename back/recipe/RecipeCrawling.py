@@ -2,7 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 
 # 만개의 레시피
-baseUrl = 'http://www.10000recipe.com'
+baseUrl = 'https://www.10000recipe.com/'
+
 
 def ItemRecipe(recipeUrl):
     url = baseUrl + recipeUrl
@@ -10,13 +11,13 @@ def ItemRecipe(recipeUrl):
     html = requests.get(url).text
     soup = BeautifulSoup(html, 'html.parser')
 
-    recipe_title_img = [] # 레시피 전체 사진
-    recipe_title = [] # 레시피 제목
-    recipe_info = [] # 레시피 정보
+    recipe_title_img = []  # 레시피 전체 사진
+    recipe_title = []  # 레시피 제목
+    recipe_info = []  # 레시피 정보
     recipe_source = {}  # 레시피 재료
-    recipe_quantity = [] # 레시피 재료 양
-    recipe_step = [] # 레시피 순서
-    recipe_step_img = [] # 레시피 순서별 사진
+    recipe_quantity = []  # 레시피 재료 양
+    recipe_step = []  # 레시피 순서
+    recipe_step_img = []  # 레시피 순서별 사진
 
     # 레시피 사진
     try:
@@ -60,7 +61,6 @@ def ItemRecipe(recipeUrl):
     if not recipe_source:
         return
 
-
     # 조리 순서
     res = soup.select("div.view_step > div.view_step_cont.media")
     i = 1
@@ -84,5 +84,6 @@ def ItemRecipe(recipeUrl):
     if not recipe_step:
         return
 
-    recipe_all = [recipe_title_img, recipe_title, recipe_info, recipe_source, recipe_quantity, recipe_step, recipe_step_img]
+    recipe_all = [recipe_title_img, recipe_title, recipe_info, recipe_source, recipe_quantity, recipe_step,
+                  recipe_step_img]
     return (recipe_all)

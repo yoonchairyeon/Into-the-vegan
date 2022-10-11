@@ -5,8 +5,6 @@ import BoardService from 'service/BoardService';
 import BestCommunityFreeItems from './BestCommunityFreeItems';
 import FeaturedPlaceItems from './FeaturedPlaceItems';
 import FeaturedRecipeItems from './FeaturedRecipeItems';
-import FeaturedShopItems from './FeaturedShopItems';
-
 
 class ItemNavbars extends Component {
     constructor(props) {
@@ -38,12 +36,7 @@ class ItemNavbars extends Component {
                 <div className="recipe-main">
                     <FeaturedRecipeItems />
                 </div>
-        } else if (this.state.mode === 'shop') {
-            featured =
-                <div className="shop-main">
-                    <FeaturedShopItems />
-                </div>
-        } else if (this.state.mode === 'place') {
+        }  else if (this.state.mode === 'place') {
             featured = 
                 <div className="place-main">
                     <FeaturedPlaceItems />

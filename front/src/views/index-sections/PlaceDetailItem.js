@@ -11,12 +11,12 @@ class PlaceDetailItem extends Component {
     }
 
     /* PlaceDetailItem 숨기기 */
-    setHidden = (e) => {
-        this.setState({
-            isHidden: true
-        });
-        this.props.changeShowDetail();
-    }
+    // setHidden = (e) => {
+    //     this.setState({
+    //         isHidden: true
+    //     });
+    //     this.props.changeShowDetail();
+    // }
 
     render() {
         const { upso_NM, cob_CODE_NM, crtfc_GBN_NM, rdn_CODE_NM, tel_NO, image, food_MENU } = this.props.place;

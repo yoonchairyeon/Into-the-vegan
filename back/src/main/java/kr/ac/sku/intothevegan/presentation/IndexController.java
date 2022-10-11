@@ -14,6 +14,6 @@ public class IndexController {
     @RequestMapping("/")
     public String home(){
         log.info("index controller");
-        return "home";
+        return "index";
     }
 }

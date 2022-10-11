@@ -1,11 +1,13 @@
 import sys
+
 import pandas as pd
 import sqlalchemy as db
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
 # db와 연결
-engine = db.create_engine('mysql+pymysql://vegin:vegin123@vegindatabase01.cyumdfzrqmsj.ap-northeast-2.rds.amazonaws.com:3306/board-back').connect()
+engine = db.create_engine('mysql+pymysql://cr:1234@localhost:3306/cr').connect()
+
 
 # 불용어 추가
 recipe_stopwords = ['비건', '비건채식', '비건레시피', '비건음식', '비건베이킹', '요리', '쿡', '법', '간단', '레시피', '채식', '베이', '킹', '음식', '초', '노', '손', '맛', '약', 'cm', 'g', 'or']

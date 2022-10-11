@@ -25,9 +25,7 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 
 // index sections
-import Banner from "./index-sections/Banner";
 import Magazine from "./index-sections/Magazine";
-import ItemNavbars from "./index-sections/ItemNavbars";
 import VeginFooter from "components/Footers/VeginFooter";
 
 function Index() {
@@ -43,8 +41,6 @@ function Index() {
       <IndexNavbar />
       <IndexHeader />
       <div className="main">
-        <ItemNavbars/>
-        <Banner/>
         <Magazine/>
         <VeginFooter />
       </div>

@@ -32,7 +32,7 @@ public class PlaceService {
 
         try {
             /* 서울 열린 데이터 광장 Open API - 서울 음식점 정보 가져오기 */
-            URL url = new URL("http://openapi.seoul.go.kr:8088/" + "41497a6663656b6634335950466b78/" +
+            URL url = new URL("http://openapi.seoul.go.kr:8088/" + "456869487863687234325169566655/" +
                     "json/CrtfcUpsoInfo/501/1500");
             BufferedReader bf;
             bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
@@ -54,8 +54,8 @@ public class PlaceService {
 
 
                 /* 네이버 검색 API - 음식점의 이미지 정보 가져오기 */
-                String clientId = "KWZO2nm_58J0kYLojjaw";
-                String clientSecret = "TYZo36AIJQ";
+                String clientId = "uW4ly9VSD8W0CdnUTgvu";
+                String clientSecret = "s7xQ2C3z4a";
 
                 String text = null;
                 try {

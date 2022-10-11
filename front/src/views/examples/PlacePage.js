@@ -4,6 +4,7 @@ import IndexNavbar from 'components/Navbars/IndexNavbar';
 import React, { useEffect, useState } from 'react';
 import { Container } from 'reactstrap';
 import PlaceDetailItem from 'views/index-sections/PlaceDetailItem';
+import PlaceItem from 'views/index-sections/PlaceItem';
 import PlaceService from 'service/PlaceService';
 import { faMagnifyingGlass, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,7 +19,7 @@ const PlacePage = () => {
     const [table, setTable] = useState(null);
     const [xPosition, setX] = useState('-741');
     const [orgTable, setorgTable] = useState([]);
-
+    let presentPosition;
 
     useEffect(() => {
         /* place_info table 불러오기 */
@@ -39,7 +40,28 @@ const PlacePage = () => {
             return null;
         }
     }, []);
+    // if (navigator.geolocation) {
+    
+    //     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    //     navigator.geolocation.getCurrentPosition(function(position) {
+            
+    //         var lat = position.coords.latitude, // 위도
+    //             lon = position.coords.longitude; // 경도
+            
+    //         var locPosition = new kakao.maps.LatLng(lat, lon) // geolocation으로 얻어온 좌표
+    //         presentPosition=locPosition;
+     
+    //         map.setCenter(locPosition);   
+                
+    //       });
+        
+    // } else { // HTML5의 GeoLocation을 사용할 수 없을때 
+        
+    //     var locPosition = new kakao.maps.LatLng(37.566826, 126.9786567)
+    //     alert('현재 위치를 찾을 수 없습니다!');
+    // }
 
+    
     /* 마커 표시 */
     function showMarkers() {
         tables.map(element => {
@@ -49,15 +71,7 @@ const PlacePage = () => {
                 title: element.upso_NM,
             });
             /* 마커에 표시할 인포윈도우를 생성 */
-            var infowindow = new kakao.maps.InfoWindow({
-                content: `
-                <div style='width:max-content'>
-                <div style='color: black; font-size:17px; font-weight:bold; margin:5px 5px 0 5px'>${element.upso_NM}</div>
-                <div style='margin:0px 5px; font-weight:bold; font-size:13px;'>☎${element.tel_NO}</div>
-                <div style='font-size:12px; margin:0px 5px 5px 5px'>${element.rdn_CODE_NM}</div>
-                </div>
-                `
-            });
+            var infowindow = new kakao.maps.InfoWindow({zIndex:1});
             kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
             kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
             kakao.maps.event.addListener(marker, 'click', function () {
@@ -174,7 +188,6 @@ const PlacePage = () => {
             <hr className='pp-title-bar' />
             <Container className='pp-box'>
                 <div className='pp-map' id="map" style={{ width: "100%", height: "800px" }}>
-                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ca7a07b349f18154bcc92b17665e7b50" />
                 </div>
                 {showDetail && <PlaceDetailItem changeShowDetail={isshowDetail} place={table} />}
                 {!showDetail &&
@@ -202,14 +215,14 @@ const PlacePage = () => {
                                     </button>
                                 }
                             </div>
-                            {/* <Container>
+                            <Container>
                                 {
                                     tables.map(
                                         table =>
                                             <PlaceItem key={table.id} changeShowDetail={() => changeShowDetail(table)} place={table} />
                                     )
                                 }
-                            </Container> */}
+                            </Container>
                         </div>
                     </div>
                 }
